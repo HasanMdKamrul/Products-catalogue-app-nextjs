@@ -1,10 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FaMoneyBillWave } from "react-icons/fa";
 import Heading from "../../components/core/Heading";
 
 const ProductDetails = ({ product }) => {
   const { id, name, description, price, picture, temp_price } = product;
+  const router = useRouter();
+
+  const handledelete = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/products/${id}/delete/`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        router.push("/all-products");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
@@ -64,6 +85,7 @@ const ProductDetails = ({ product }) => {
                   </button>
                 </Link>
                 <button
+                  onClick={() => handledelete(id)}
                   type="submit"
                   className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-blue-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                 >
