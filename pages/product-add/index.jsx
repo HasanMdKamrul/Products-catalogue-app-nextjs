@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Button from "../../components/core/Button";
@@ -47,6 +48,9 @@ const index = () => {
 
   return (
     <>
+      <Head>
+        <title>Sasol | Add Product</title>
+      </Head>
       <Heading>Add Your Product</Heading>
       <section className="flex justify-center items-center ">
         <form onSubmit={handleSubmit}>

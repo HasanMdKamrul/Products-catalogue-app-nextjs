@@ -1,12 +1,13 @@
+import Footer from "../components/core/Footer";
 import Navbar from "../components/core/Navbar";
 
 const Main = ({ children }) => {
   return (
-    <div>
+    <>
       <Navbar />
       {children}
-      <h1>Footer</h1>
-    </div>
+      <Footer />
+    </>
   );
 };
 

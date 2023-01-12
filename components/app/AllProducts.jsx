@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import Heading from "../core/Heading";
 import ProductCard from "./ProductCard";
@@ -34,6 +35,9 @@ const AllProducts = ({ products }) => {
 
   return (
     <>
+      <Head>
+        <title>Sasol | All Products</title>
+      </Head>
       <Heading>Search Your Product</Heading>
       <div className="flex justify-center items-center">
         <input
@@ -49,7 +53,7 @@ const AllProducts = ({ products }) => {
       {searchResults.length > 0 && (
         <div className="flex justify-center items-center my-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-20 gap-5">
-            {searchResults.map((product) => (
+            {searchResults?.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -61,7 +65,7 @@ const AllProducts = ({ products }) => {
       <Heading>All Our Products</Heading>
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-20 gap-5">
-          {products.map((product) => (
+          {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
