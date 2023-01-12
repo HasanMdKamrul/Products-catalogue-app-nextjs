@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   const { name, price, temp_price } = product;
   const router = useRouter();
 
@@ -12,7 +11,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+    <div className="max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 ">
       <div className="px-4 py-2">
         <h1 className="text-3xl font-bold text-gray-800 uppercase dark:text-white">
           {name}

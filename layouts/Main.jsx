@@ -1,7 +1,9 @@
+import Navbar from "../components/core/Navbar";
+
 const Main = ({ children }) => {
   return (
     <div>
-      <h1>Navbar</h1>
+      <Navbar />
       {children}
       <h1>Footer</h1>
     </div>
