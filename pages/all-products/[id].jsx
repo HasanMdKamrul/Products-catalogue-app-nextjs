@@ -11,7 +11,7 @@ const ProductDetails = ({ product }) => {
   const handledelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/products/${id}/delete/`,
+        `${process.env.NEXT_PUBLIC_API_URL}api/products/${id}/delete/`,
         {
           method: "DELETE",
         }

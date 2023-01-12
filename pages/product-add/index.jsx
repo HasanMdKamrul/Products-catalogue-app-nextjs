@@ -3,22 +3,19 @@ import { useState } from "react";
 import Button from "../../components/core/Button";
 import Heading from "../../components/core/Heading";
 
-const ProductUpdate = ({ product }) => {
-  const { name, description, price, picture, active } = product;
+const index = () => {
+  const [activeState, setActiveState] = useState(false);
   const router = useRouter();
-
-  const [activeState, setActiveState] = useState(active);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-
     const name = form.name.value;
     const description = form.description.value;
     const price = form.price.value;
     const picture = form.picture.value;
 
-    const updatedProductObject = {
+    const newProductObject = {
       name,
       description,
       price,
@@ -28,13 +25,13 @@ const ProductUpdate = ({ product }) => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}api/products/${product?.id}/update/`,
+        `${process.env.NEXT_PUBLIC_API_URL}api/products/add/`,
         {
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(updatedProductObject),
+          body: JSON.stringify(newProductObject),
         }
       );
 
@@ -50,16 +47,12 @@ const ProductUpdate = ({ product }) => {
 
   return (
     <>
-      <Heading>
-        Update your product{" "}
-        <span className="text-blue-400">{product.name}</span>
-      </Heading>
+      <Heading>Add Your Product</Heading>
       <section className="flex justify-center items-center ">
         <form onSubmit={handleSubmit}>
           <div>
             <input
               name="name"
-              defaultValue={name}
               type="text"
               placeholder="Name"
               className="input input-bordered w-full max-w-xs my-1"
@@ -68,7 +61,6 @@ const ProductUpdate = ({ product }) => {
           <div>
             <input
               name="description"
-              defaultValue={description}
               type="text"
               placeholder="Description..."
               className="input input-bordered w-full max-w-xs my-1 input-lg"
@@ -77,7 +69,6 @@ const ProductUpdate = ({ product }) => {
           <div>
             <input
               name="price"
-              defaultValue={price}
               type="text"
               placeholder="Price"
               className="input input-bordered w-full max-w-xs my-1"
@@ -86,7 +77,6 @@ const ProductUpdate = ({ product }) => {
           <div>
             <input
               name="picture"
-              defaultValue={picture}
               type="text"
               placeholder="Picture Url..."
               className="input input-bordered input-lg w-full max-w-xs my-1"
@@ -105,7 +95,7 @@ const ProductUpdate = ({ product }) => {
             />
           </div>
           <div>
-            <Button>Update</Button>
+            <Button>Add Product</Button>
           </div>
         </form>
       </section>
@@ -113,21 +103,4 @@ const ProductUpdate = ({ product }) => {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context?.params?.id}`
-    );
-    const product = await response.json();
-
-    return {
-      props: {
-        product,
-      },
-    };
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export default ProductUpdate;
+export default index;
